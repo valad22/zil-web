@@ -61,7 +61,7 @@
 			</span>
 		požiadaviek.</p>
 		<p id='head5' class='header'>Tvorba <span class="fancy">spoľahlivých</span> aplikácií</p>
-		<a href="mailto:info@zilvar.sk" target="_blank">
+		<a onclick="handleEmailClick(this)">
 			<button>info@zilvar.sk</button>
 		</a>
 		<div class='light x1'></div>
@@ -73,5 +73,26 @@
 		<div class='light x7'></div>
 		<div class='light x8'></div>
 		<div class='light x9'></div>
+		<script>
+		let isAnimating = false;
+		function handleEmailClick(element) {
+			if (isAnimating) return;
+			const button = element.querySelector('button');
+			const originalText = button.textContent;
+			// Skopíruj email
+			navigator.clipboard.writeText('info@zilvar.sk');
+			// Zmeň text na "Skopírované"
+			button.textContent = 'Skopírované';
+			isAnimating = true;
+			// Po 1.5 sekunde vráť pôvodný text
+			setTimeout(() => {
+				button.textContent = originalText;
+				isAnimating = false;
+			}, 1500);
+			// Skús otvoriť email klienta
+			window.location.href = 'mailto:info@zilvar.sk?subject=Dotaz z webstránky';
+		}
+		</script>
 	</body>
+
 </html>
